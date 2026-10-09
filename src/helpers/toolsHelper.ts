@@ -1,7 +1,7 @@
-import Swal from 'sweetalert2'
-export const showSuccessDialog = (title: string, text = '') => Swal.fire({ icon: 'success', title, text, confirmButtonText: 'Mengerti', confirmButtonColor: '#4f46e5' })
-export const showErrorDialog = (title: string, text = '') => Swal.fire({ icon: 'error', title, text, confirmButtonText: 'Tutup', confirmButtonColor: '#4f46e5' })
-export const showConfirmDialog = (title: string, text = '') => Swal.fire({ icon: 'warning', title, text, showCancelButton: true, confirmButtonText: 'Ya, lanjutkan', cancelButtonText: 'Batal', confirmButtonColor: '#dc2626' })
+const loadSwal = async () => (await import('sweetalert2')).default
+export const showSuccessDialog = (title: string, text = '') => loadSwal().then((Swal) => Swal.fire({ icon: 'success', title, text, confirmButtonText: 'Mengerti', confirmButtonColor: '#4f46e5' }))
+export const showErrorDialog = (title: string, text = '') => loadSwal().then((Swal) => Swal.fire({ icon: 'error', title, text, confirmButtonText: 'Tutup', confirmButtonColor: '#4f46e5' }))
+export const showConfirmDialog = (title: string, text = '') => loadSwal().then((Swal) => Swal.fire({ icon: 'warning', title, text, showCancelButton: true, confirmButtonText: 'Ya, lanjutkan', cancelButtonText: 'Batal', confirmButtonColor: '#dc2626' }))
 export function formatRupiah(value: number | string | null | undefined): string {
   const amount = Number(value ?? 0)
   return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(Number.isFinite(amount) ? amount : 0)

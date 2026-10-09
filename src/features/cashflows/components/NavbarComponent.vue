@@ -38,7 +38,7 @@ function logout() {
       to="/"
       class="text-xl font-extrabold tracking-tight text-indigo-700"
     >
-      delcom<span class="text-slate-400">.</span>
+      delcom<span class="text-slate-600">.</span>
     </NuxtLink>
 
     <div class="flex items-center gap-3">
@@ -47,7 +47,7 @@ function logout() {
           {{ displayName }}
         </p>
 
-        <p class="text-xs text-slate-500">
+        <p class="text-xs text-slate-600">
           @{{ displayUsername }}
         </p>
       </div>

@@ -1,5 +1,7 @@
 import tailwindcss from '@tailwindcss/vite'
 
+const FONT_URL = 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap'
+
 export default defineNuxtConfig({
   compatibilityDate: '2026-10-09',
   srcDir: 'src/',
@@ -20,13 +22,16 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      htmlAttrs: { lang: 'id' },
       title: 'Delcom Cash Flow',
       meta: [{ name: 'description', content: 'Dashboard pencatatan arus kas pribadi.' }],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap' }
-      ]
+        { rel: 'preload', as: 'style', href: FONT_URL },
+        { rel: 'stylesheet', href: FONT_URL, media: 'print', onload: "this.media='all'" }
+      ],
+      noscript: [{ innerHTML: `<link rel="stylesheet" href="${FONT_URL}">` }]
     }
   },
   devServer: { port: Number(process.env.APP_PORT || 3000) },

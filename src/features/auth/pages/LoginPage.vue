@@ -27,11 +27,11 @@ async function submit() {
       Selamat datang kembali
     </p>
 
-    <h2 class="mt-2 text-3xl font-extrabold">
+    <h1 class="mt-2 text-3xl font-extrabold">
       Masuk ke akunmu
-    </h2>
+    </h1>
 
-    <p class="mt-2 text-sm text-slate-500">
+    <p class="mt-2 text-sm text-slate-600">
       Kelola transaksi dan pantau kondisi keuanganmu.
     </p>
 
@@ -72,7 +72,7 @@ async function submit() {
       </button>
     </form>
 
-    <p class="mt-6 text-center text-sm text-slate-500">
+    <p class="mt-6 text-center text-sm text-slate-600">
       Belum punya akun?
       <NuxtLink
         class="font-bold text-indigo-700"
