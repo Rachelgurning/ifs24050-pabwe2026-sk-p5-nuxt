@@ -55,3 +55,39 @@ describe('ProfilePage actions', () => {
     expect(showErrorDialog).toHaveBeenCalledWith('Gagal memuat profil', 'offline')
   })
 })
+
+describe('ProfilePage avatar upload', () => {
+  async function mountWithFile(upload: ReturnType<typeof vi.fn>) {
+    const { pinia, store } = setup()
+    vi.spyOn(store, 'uploadAvatar').mockImplementation(upload as never)
+    const wrapper = mount(ProfilePage, { global: { plugins: [pinia] } })
+    await flushPromises()
+    return wrapper
+  }
+
+  it('does nothing when no file is selected', async () => {
+    const upload = vi.fn()
+    const wrapper = await mountWithFile(upload)
+    const button = wrapper.findAll('button').find(b => /unggah|upload|foto/i.test(b.text()))
+    await button?.trigger('click')
+    await flushPromises()
+    expect(upload).not.toHaveBeenCalled()
+  })
+
+  it('uploads the selected file and reports success or failure', async () => {
+    const upload = vi.fn().mockResolvedValueOnce({}).mockRejectedValueOnce(new Error('gagal unggah'))
+    const wrapper = await mountWithFile(upload)
+    const input = wrapper.get('input[type="file"]')
+    const file = new File(['a'], 'a.png', { type: 'image/png' })
+    Object.defineProperty(input.element, 'files', { value: [file], configurable: true })
+    await input.trigger('change')
+    const button = wrapper.findAll('button').find(b => /unggah|upload|foto/i.test(b.text()))
+    await button?.trigger('click')
+    await flushPromises()
+    expect(upload).toHaveBeenCalledWith(file)
+    expect(showSuccessDialog).toHaveBeenCalledWith('Foto diunggah', 'Foto profil berhasil dikirim.')
+    await button?.trigger('click')
+    await flushPromises()
+    expect(showErrorDialog).toHaveBeenCalledWith('Gagal mengunggah foto', 'gagal unggah')
+  })
+})

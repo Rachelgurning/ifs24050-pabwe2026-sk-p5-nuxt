@@ -1,9 +1,0 @@
-<script setup lang="ts">
-import { onMounted } from 'vue'
-import { Users, UserRound } from 'lucide-vue-next'
-import { useUsersStore } from '../states/usersStore'
-import { showErrorDialog } from '~/helpers/toolsHelper'
-const store = useUsersStore()
-onMounted(async () => { try { await store.fetchUsers() } catch(e) { await showErrorDialog('Gagal memuat pengguna', e instanceof Error ? e.message : '') } })
-</script>
-<template><div><p class="text-sm font-bold text-indigo-600">KOMUNITAS</p><h1 class="mt-2 text-3xl font-extrabold">Direktori pengguna</h1><p class="mt-2 text-sm text-slate-600">Daftar akun yang terdaftar pada sistem.</p><section class="mt-7 rounded-2xl border border-slate-100 bg-white p-5 shadow-sm"><div class="mb-5 flex items-center gap-3"><span class="grid h-11 w-11 place-items-center rounded-xl bg-indigo-50 text-indigo-700"><Users :size="20"/></span><div><h2 class="font-extrabold">Semua pengguna</h2><p class="text-sm text-slate-600">{{ store.users.length }} pengguna</p></div></div><div v-if="store.isLoading" class="py-12 text-center text-slate-600">Memuat pengguna...</div><div v-else-if="!store.users.length" class="py-12 text-center text-sm text-slate-600">Belum ada data pengguna.</div><div v-else class="grid gap-3 md:grid-cols-2 xl:grid-cols-3"><article v-for="u in store.users" :key="u.id" class="flex items-center gap-4 rounded-xl border border-slate-100 p-4"><div class="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-indigo-100 text-indigo-700"><UserRound :size="20"/></div><div class="min-w-0"><p class="truncate font-bold">{{ u.name || u.username || 'Pengguna' }}</p><p class="truncate text-sm text-slate-600">@{{ u.username || '—' }}</p><p class="truncate text-xs text-slate-600">{{ u.email || 'Email tidak tersedia' }}</p></div></article></div></section></div></template>
