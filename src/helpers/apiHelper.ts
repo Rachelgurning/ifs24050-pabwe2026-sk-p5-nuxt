@@ -20,7 +20,8 @@ export async function apiFetch<T>(path: string, options: RequestInit = {}, baseU
   if (token) headers.set('Authorization', `Bearer ${token}`)
   let response: Response
   try {
-    response = await fetch(`${base}${path.startsWith('/') ? path : `/${path}`}`, { ...options, headers })
+    const normalizedPath = path.startsWith('/') ? path : '/' + path
+    response = await fetch(`${base}${normalizedPath}`, { ...options, headers })
   } catch {
     throw new Error('Tidak dapat terhubung ke server. Periksa koneksi internet Anda.')
   }

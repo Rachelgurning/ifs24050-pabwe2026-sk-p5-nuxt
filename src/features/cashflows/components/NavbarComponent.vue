@@ -1,4 +1,3 @@
-```vue
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAuthStore } from '~/features/auth/states/authStore'
@@ -68,4 +67,3 @@ function logout() {
     </div>
   </header>
 </template>
-```

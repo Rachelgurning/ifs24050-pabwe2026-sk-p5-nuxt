@@ -1,4 +1,3 @@
-```vue
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAuthStore } from '../states/authStore'
@@ -83,4 +82,3 @@ async function submit() {
     </p>
   </div>
 </template>
-```

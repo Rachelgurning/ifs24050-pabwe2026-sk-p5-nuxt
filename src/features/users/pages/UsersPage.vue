@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { Search, Users, UserRound } from 'lucide-vue-next'
+import { Users, UserRound } from 'lucide-vue-next'
 import { useUsersStore } from '../states/usersStore'
 import { showErrorDialog } from '~/helpers/toolsHelper'
 const store = useUsersStore()
