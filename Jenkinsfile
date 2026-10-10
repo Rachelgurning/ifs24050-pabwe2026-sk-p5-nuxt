@@ -112,7 +112,17 @@ pipeline {
                     echo "=== Trivy Version ==="
                     trivy --version
 
-                    echo "=== Trivy Scan ==="
+                    echo "=== Trivy Table (info only, tidak menggagalkan build) ==="
+
+                    trivy fs \
+                        --cache-dir .trivy-cache \
+                        --scanners vuln \
+                        --severity HIGH,CRITICAL \
+                        --format table \
+                        --exit-code 0 \
+                        .
+
+                    echo "=== Trivy Scan (SARIF, menentukan lulus/gagal) ==="
 
                     trivy fs \
                         --cache-dir .trivy-cache \
