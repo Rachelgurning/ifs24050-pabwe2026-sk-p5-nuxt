@@ -59,19 +59,12 @@ pipeline {
                 docker {
                     image 'node:24-alpine'
                     reuseNode true
-                    args '-e HOME=/tmp'
                 }
             }
 
             steps {
                 sh '''
                     set -e
-
-                    echo "=== Generating Nuxt types (.nuxt) ==="
-
-                    # Wajib: tsconfig.json meng-extend .nuxt/tsconfig.json,
-                    # tanpa ini vitest gagal mem-parse file TypeScript.
-                    npx nuxt prepare
 
                     echo "=== Running Tests with Coverage ==="
 
@@ -112,17 +105,7 @@ pipeline {
                     echo "=== Trivy Version ==="
                     trivy --version
 
-                    echo "=== Trivy Table (info only, tidak menggagalkan build) ==="
-
-                    trivy fs \
-                        --cache-dir .trivy-cache \
-                        --scanners vuln \
-                        --severity HIGH,CRITICAL \
-                        --format table \
-                        --exit-code 0 \
-                        .
-
-                    echo "=== Trivy Scan (SARIF, menentukan lulus/gagal) ==="
+                    echo "=== Trivy Scan ==="
 
                     trivy fs \
                         --cache-dir .trivy-cache \
@@ -226,8 +209,8 @@ pipeline {
                         -x ".env" \
                         -x ".env.*" \
                         -x "coverage/*" \
-                        -x ".nuxt/*" \
-                        -x ".output/*" \
+                        -x ".next/*" \
+                        -x "out/*" \
                         -x ".trivy-cache/*" \
                         -x "latest-app.zip" \
                         -x "trivy-results.sarif" \
