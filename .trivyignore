@@ -13,3 +13,7 @@ CVE-2026-85393
 GHSA-x6jw-m9v5-85vh
 GHSA-g4wm-2vf7-vfgr
 GHSA-858h-whjf-mvg5
+# simple-git (dependensi @nuxt/devtools, dev only; override ke v4 merusak nuxt prepare)
+CVE-2026-102828
+CVE-2026-102826
+CVE-2026-102827
