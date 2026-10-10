@@ -59,12 +59,19 @@ pipeline {
                 docker {
                     image 'node:24-alpine'
                     reuseNode true
+                    args '-e HOME=/tmp'
                 }
             }
 
             steps {
                 sh '''
                     set -e
+
+                    echo "=== Generating Nuxt types (.nuxt) ==="
+
+                    # Wajib: tsconfig.json meng-extend .nuxt/tsconfig.json,
+                    # tanpa ini vitest gagal mem-parse file TypeScript.
+                    npx nuxt prepare
 
                     echo "=== Running Tests with Coverage ==="
 
@@ -209,8 +216,8 @@ pipeline {
                         -x ".env" \
                         -x ".env.*" \
                         -x "coverage/*" \
-                        -x ".next/*" \
-                        -x "out/*" \
+                        -x ".nuxt/*" \
+                        -x ".output/*" \
                         -x ".trivy-cache/*" \
                         -x "latest-app.zip" \
                         -x "trivy-results.sarif" \

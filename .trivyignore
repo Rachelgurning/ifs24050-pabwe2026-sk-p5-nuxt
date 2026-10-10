@@ -1,0 +1,15 @@
+# Sementara abaikan kerentanan braces dan node-forge
+# 1. braces (stack-exhaustion DoS): no published version fix yet (> 3.0.3)
+GHSA-vfj7-8cjw-p6xm
+CVE-2026-93687
+
+# 2. node-forge (RSA PKCS#1 v1.5 verification in listhen): no published version fix yet (> 1.4.0)
+GHSA-86w9-cpqp-85rv
+CVE-2026-85393
+
+# 3. simple-git (dependensi @nuxt/devtools, hanya dipakai saat development, tidak masuk build produksi)
+#    Perbaikan ada di simple-git 4.x, tetapi Nuxt devtools belum kompatibel dengan v4 (import default hilang),
+#    jadi override ke ^4 membuat `nuxt prepare` crash.
+GHSA-x6jw-m9v5-85vh
+GHSA-g4wm-2vf7-vfgr
+GHSA-858h-whjf-mvg5

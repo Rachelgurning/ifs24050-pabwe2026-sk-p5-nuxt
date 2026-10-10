@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { ArrowLeft, Pencil, Trash2 } from 'lucide-vue-next'
 import { useCashFlowsStore } from '../states/cashFlowsStore'
 import { formatDateTime, formatRupiah, showConfirmDialog, showErrorDialog } from '~/helpers/toolsHelper'

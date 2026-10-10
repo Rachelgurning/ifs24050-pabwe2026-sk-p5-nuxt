@@ -38,6 +38,7 @@ describe('HomePage UI', () => {
     store = useCashFlowsStore(pinia)
     vi.spyOn(store, 'fetchCashFlows').mockResolvedValue([])
     vi.spyOn(store, 'fetchLabels').mockResolvedValue([])
+    vi.spyOn(store, 'removeAllCashFlows').mockResolvedValue()
     const wrapper = mount(HomePage, {
       global: {
         plugins: [pinia],
